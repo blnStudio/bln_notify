@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLN Notify</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div v-for="(container, position) in notificationContainers" :key="position"
+      :class="['notification-container', position]">
+      <transition-group name="jelly" tag="div">
+        <div v-for="notification in container" :key="notification.id" :class="['notification', position, 
+                              { 'with-bg': notification.useBackground, 'without-bg': !notification.useBackground },
+                              `align-${notification.contentAlignment} ${ notification.isRTL ? 'rtl' : 'ltr'}`,]"
+          :style="{ direction: notification.isRTL ? 'rtl' : 'ltr' }">
+          <img v-if="notification.icon" :src="getIconUrl(notification.icon)" alt="Notification Icon"
+            class="notification-icon" />
+          <div :class="['notification-content', { 'with-description': notification.description }]">
+            <div class="notification-title" :style="{ color: notification.titleColor }">
+              {{ notification.title }}
+            </div>
+            <div v-if="notification.description" class="notification-description"
+              :style="{ color: notification.descriptionColor }">
+              {{ notification.description }}
+            </div>
+          </div>
+        </div>
+      </transition-group>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: "#app",
+      data: function () {
+        return {
+          positions: [
+            "top-right",
+            "top-center",
+            "top-left",
+            "middle-right",
+            "middle-center",
+            "middle-left",
+            "bottom-right",
+            "bottom-center",
+            "bottom-left",
+          ],
+          selectedPosition: "top-right",
+          notificationContainers: {},
+          notificationCount: 0,
+          useBackground: true,
+          useCustomColors: false,
+          contentAlignment: "start",
+          isRTL: false,
+        };
+      },
+      created: function () {
+        this.positions.forEach((position) => {
+          this.$set(this.notificationContainers, position, []);
+        });
+
+        window.addEventListener('message', (event) => {
+          if (event.data.type === 'BLN_NOTIFY') {
+            this.notify(event.data.options);
+          }
+        });
+      },
+      methods: {
+        notify: function (options) {
+          var placement = options.placement || this.selectedPosition;
+          var title = options.title || "Notification";
+          var description = options.description || null;
+          var duration = options.duration || 5000;
+          var icon = options.icon || null;
+          var useBackground = options.useBackground !== undefined ? options.useBackground : this.useBackground;
+          var contentAlignment = options.contentAlignment || this.contentAlignment;
+          var isRTL = options.isRTL !== undefined ? options.isRTL : this.isRTL;
+          var titleColor = options.titleColor;
+          var descriptionColor = options.descriptionColor;
+          var id = this.notificationCount++;
+
+          this.$set(this.notificationContainers, placement, [
+            {
+              id: id,
+              title: title,
+              description: description,
+              icon: icon,
+              useBackground: useBackground,
+              contentAlignment: contentAlignment,
+              isRTL: isRTL,
+              titleColor: titleColor,
+              descriptionColor: descriptionColor,
+            },
+            ...this.notificationContainers[placement],
+          ]);
+
+          setTimeout(() => {
+            this.removeNotification(placement, id);
+          }, duration);
+        },
+        removeNotification: function (position, id) {
+          var index = this.notificationContainers[position].findIndex(n => n.id === id);
+          if (index !== -1) {
+            this.notificationContainers[position].splice(index, 1);
+          }
+        },
+        getIconUrl: function (icon) {
+          if (icon.includes('//')) {
+            return icon;
+          }
+          return `http://femga.com/images/samples/ui_textures_no_bg/ui_textures_mp/inventory_items_mp/${icon}.png`;
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>

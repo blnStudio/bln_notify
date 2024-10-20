@@ -1,0 +1,407 @@
+@font-face {
+    font-family: Crock;
+    src: url(../fonts/crock.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: Hapna;
+    src: url(../fonts/Hapna.ttf) format("truetype");
+    font-weight: 400
+}
+
+@font-face {
+    font-family: Hapna;
+    src: url(../fonts/HapnaMedium.ttf) format("truetype");
+    font-weight: 500
+}
+
+@font-face {
+    font-family: Hapna;
+    src: url(../fonts/HapnaDemiBold.ttf) format("truetype");
+    font-weight: 600
+}
+
+@font-face {
+    font-family: Hapna;
+    src: url(../fonts/HapnaBold.ttf) format("truetype");
+    font-weight: 700
+}
+
+@font-face {
+    font-family: Hapna;
+    src: url(../fonts/HapnaExtraBold.ttf) format("truetype");
+    font-weight: 800
+}
+
+@font-face {
+    font-family: Hapna;
+    src: url(../fonts/HapnaLight.ttf) format("truetype");
+    font-weight: 300
+}
+
+.notification-container {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    width: 420px;
+    max-width: 90%;
+    transition: all 0.3s ease-in-out;
+}
+
+.notification-container.top-right {
+    top: 2rem;
+    right: 3rem;
+}
+
+.notification-container.top-center {
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.notification-container.top-left {
+    top: 2rem;
+    left: 3rem;
+}
+
+.notification-container.middle-right {
+    top: 50%;
+    right: 3rem;
+    transform: translateY(-50%);
+}
+
+.notification-container.middle-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.notification-container.middle-left {
+    top: 50%;
+    left: 3rem;
+    transform: translateY(-50%);
+}
+
+.notification-container.bottom-right {
+    bottom: 2rem;
+    right: 3rem;
+}
+
+.notification-container.bottom-center {
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.notification-container.bottom-left {
+    bottom: 2rem;
+    left: 3rem;
+}
+
+.notification {
+    color: white;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    pointer-events: auto;
+}
+
+.notification.with-bg {
+    padding: 1.2rem;
+    background: url(../imgs/toast.png) no-repeat center center;
+    background-size: 100% 100%;
+}
+
+.notification.with-bg.rtl {
+    background: url(../imgs/toast-rtl.png) no-repeat center center;
+    background-size: 100% 100%;
+}
+
+.notification.without-bg {
+    text-shadow: 0px 0px 0px rgba(0, 0, 0, 1), 1px 1px 5px rgba(0, 0, 0, 1);
+}
+
+.notification-content {
+    flex-grow: 1;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.notification-content.with-description {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.notification.rtl .notification-content {
+    margin-right: 0;
+    margin-left: 1rem;
+}
+
+.notification-icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 1.2rem;
+    flex-shrink: 0;
+}
+
+.notification.rtl .notification-icon {
+    margin-right: 0;
+    margin-left: 1rem;
+}
+
+.notification-title {
+    margin-bottom: 0;
+    font-size: 1.2em;
+    font-family: 'Crock';
+}
+
+.notification.without-bg .notification-title {
+    font-size: 1em;
+    font-weight: normal;
+    font-weight: 600;
+    font-family: 'Hapna';
+}
+
+.notification-content.with-description .notification-title {
+    margin-bottom: 0.25rem;
+}
+
+.notification-description {
+    font-weight: 600;
+    font-family: 'Hapna';
+    font-size: 1em;
+    opacity: 0.8;
+}
+
+.notification.align-start {
+    text-align: start;
+}
+
+.notification.align-center {
+    text-align: center;
+}
+
+.notification.align-end {
+    text-align: end;
+}
+
+.notification.without-bg.ltr.top-right .notification-content,
+.notification.without-bg.ltr.middle-right .notification-content,
+.notification.without-bg.ltr.bottom-right .notification-content,
+.notification.without-bg.rtl.top-left .notification-content,
+.notification.without-bg.rtl.middle-left .notification-content,
+.notification.without-bg.rtl.bottom-left .notification-content {
+    justify-content: end;
+}
+
+.notification.without-bg.top-center .notification-content,
+.notification.without-bg.middle-center .notification-content,
+.notification.without-bg.bottom-center .notification-content {
+    justify-content: center;
+}
+
+
+@keyframes jellyInRight {
+    0% {
+        transform: translateX(120%);
+    }
+
+    40% {
+        transform: translateX(-20%);
+    }
+
+    70% {
+        transform: translateX(5%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes jellyInLeft {
+    0% {
+        transform: translateX(-120%);
+    }
+
+    40% {
+        transform: translateX(20%);
+    }
+
+    70% {
+        transform: translateX(-5%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes jellyInUp {
+    0% {
+        transform: translateY(120%);
+    }
+
+    40% {
+        transform: translateY(-20%);
+    }
+
+    70% {
+        transform: translateY(5%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes jellyInDown {
+    0% {
+        transform: translateY(-120%);
+    }
+
+    40% {
+        transform: translateY(20%);
+    }
+
+    70% {
+        transform: translateY(-5%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes jellyOutRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    30% {
+        transform: translateX(-5%);
+    }
+
+    60% {
+        transform: translateX(20%);
+    }
+
+    100% {
+        transform: translateX(120%);
+    }
+}
+
+@keyframes jellyOutLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    30% {
+        transform: translateX(5%);
+    }
+
+    60% {
+        transform: translateX(-20%);
+    }
+
+    100% {
+        transform: translateX(-120%);
+    }
+}
+
+@keyframes jellyOutUp {
+    0% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(5%);
+    }
+
+    60% {
+        transform: translateY(-20%);
+    }
+
+    100% {
+        transform: translateY(-120%);
+    }
+}
+
+@keyframes jellyOutDown {
+    0% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-5%);
+    }
+
+    60% {
+        transform: translateY(20%);
+    }
+
+    100% {
+        transform: translateY(120%);
+    }
+}
+
+.jelly-enter-active {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+
+.jelly-leave-active {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+
+.jelly-enter-active.top-right,
+.jelly-enter-active.middle-right,
+.jelly-enter-active.bottom-right {
+    animation-name: jellyInRight;
+}
+
+.jelly-enter-active.top-left,
+.jelly-enter-active.middle-left,
+.jelly-enter-active.bottom-left {
+    animation-name: jellyInLeft;
+}
+
+.jelly-enter-active.top-center {
+    animation-name: jellyInDown;
+}
+
+.jelly-enter-active.middle-center {
+    animation-name: jellyInLeft;
+}
+
+.jelly-enter-active.bottom-center {
+    animation-name: jellyInUp;
+}
+
+.jelly-leave-active.top-right,
+.jelly-leave-active.middle-right,
+.jelly-leave-active.bottom-right {
+    animation-name: jellyOutRight;
+}
+
+.jelly-leave-active.top-left,
+.jelly-leave-active.middle-left,
+.jelly-leave-active.bottom-left {
+    animation-name: jellyOutLeft;
+}
+
+.jelly-leave-active.top-center {
+    animation-name: jellyOutUp;
+}
+
+.jelly-leave-active.middle-center {
+    animation-name: jellyOutLeft;
+}
+
+.jelly-leave-active.bottom-center {
+    animation-name: jellyOutDown;
+}
