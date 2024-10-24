@@ -1,30 +1,96 @@
 Config = {}
 
 Config.Templates = {
+    -- ----------------------------
+    -- Advanced notification templates
+    -- ----------------------------
     INFO = {
         title = "Information",
-        icon = "http://femga.com/images/samples/ui_textures_no_bg/menu_textures/menu_icon_alert.png",
+        icon = "warning",
         duration = 5000,
         titleColor = "#FFFFFF",
-        descriptionColor = "#CCCCCC"
+        descriptionColor = "#CCCCCC",
+        placement = 'middle-left',
+        customSound = {
+            sound = "INFO",
+            soundSet = "HUD_SHOP_SOUNDSET"
+        }
     },
     SUCCESS = {
         title = "Success",
-        icon = "http://femga.com/images/samples/ui_textures_no_bg/generic_textures/tick.png",
+        icon = "tick",
         duration = 5000,
         titleColor = "#00FF00",
-        descriptionColor = "#CCFFCC"
+        descriptionColor = "#CCFFCC",
+        placement = 'middle-left',
+        customSound = {
+            sound = "CHECKPOINT_PERFECT",
+            soundSet = "HUD_MINI_GAME_SOUNDSET",
+        }
     },
     ERROR = {
         title = "Error",
-        icon = "http://femga.com/images/samples/ui_textures_no_bg/menu_textures/cross.png",
+        icon = "cross",
         duration = 7000,
         titleColor = "#FF0000",
-        descriptionColor = "#FFCCCC"
+        descriptionColor = "#FFCCCC",
+        placement = 'middle-left',
+        customSound = {
+            sound = "FAIL",
+            soundSet = "Objective_Sounds"
+        }
     },
+    REWARD_MONEY = {
+        title = "Here's your reward!",
+        icon = 'toast_mp_daily_objective_small',
+        duration = 7000,
+        placement = 'middle-left',
+        customSound = {
+            sound = "REWARD_NEW_GUN",
+            soundSet = "HUD_REWARD_SOUNDSET"
+        }
+    },
+    
+    -- ----------------------------
+    -- Tip notification templates
+    -- ----------------------------
     TIP = {
         useBackground = false,
         duration = 5000,
-        placement = 'middle-right'
-    }
+        placement = 'middle-right',
+        customSound = {
+            sound = "INFO_SHOW",
+            soundSet = "Ledger_Sounds"
+        }
+    },
+    TIP_CASH = {
+        icon = 'leaderboard_cash',
+        useBackground = false,
+        duration = 5000,
+        placement = 'middle-right',
+        customSound = {
+            sound = "PURCHASE",
+            soundSet = "Ledger_Sounds"
+        }
+    },
+    TIP_XP = {
+        icon = 'leaderboard_xp',
+        useBackground = false,
+        duration = 5000,
+        placement = 'middle-right',
+        customSound = {
+            sound = "INFO_SHOW",
+            soundSet = "Ledger_Sounds"
+        }
+    },
+    TIP_GOLD = {
+        icon = 'leaderboard_gold',
+        useBackground = false,
+        duration = 5000,
+        placement = 'middle-right',
+        customSound = {
+            sound = "REWARD_NEW_GUN",
+            soundSet = "HUD_REWARD_SOUNDSET"
+        }
+    },
 }

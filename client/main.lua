@@ -23,13 +23,19 @@ local function SendNotification(options, template)
     })
 end
 
+RegisterNuiCallback("playSound", function(data, cb)
+
+    if data.sound and data.soundSet then
+        PlaySoundFrontend(data.sound, data.soundSet, true, 0)
+    else
+        local sound = "INFO_HIDE"
+        local soundSet = "Ledger_Sounds"
+        PlaySoundFrontend(sound, soundSet, true, 0)
+    end
+    cb("ok")
+end)
+
 RegisterNetEvent(resourceName .. ":send")
 AddEventHandler(resourceName .. ":send", function(options, template)
     SendNotification(options, template)
 end)
-
-
-
--- TODO: in css, make the icon flips.
--- TODO: changes fonts to rdr style with ar support.
--- TODO: add frotend sounds in lua.

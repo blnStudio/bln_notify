@@ -13,17 +13,57 @@ local placements = {
 }
 
 local function GetRandomIcon()
-    local iconList = {
-        'generic_bundle_crafting',
-        'consumable_meal_camp_stew_daily_7',
-        'document_animal_pamphlet',
-        'document_card_pentacles_set',
-        'mp_animal_panther_legendary_03',
-        'provision_coin_1800_gld_dlr',
-        'generic_coach',
-        'generic_horse_mod',
+    local awardIcons = {
+        "awards_set_a_009",
+        "awards_set_a_010",
+        "awards_set_a_011",
+        "awards_set_a_012",
+        "awards_set_a_013",
+        "awards_set_a_014",
+        "awards_set_a_015",
+        "awards_set_b_001",
+        "awards_set_b_001",
+        "awards_set_b_003",
+        "awards_set_b_019",
+        "awards_set_b_011",
+        "awards_set_b_012",
+        "awards_set_b_013",
+        "awards_set_b_014",
+        "awards_set_b_015",
+        "awards_set_b_016",
+        "awards_set_b_019",
+        "awards_set_c_001",
+        "awards_set_c_002",
+        "awards_set_c_003",
+        "awards_set_c_004",
+        "awards_set_c_005",
+        "awards_set_c_006",
+        "awards_set_c_008",
+        "awards_set_c_010",
+        "awards_set_c_011",
+        "awards_set_c_012",
+        "awards_set_c_013",
+        "awards_set_c_014",
+        "awards_set_d_001",
+        "awards_set_d_002",
+        "awards_set_d_003",
+        "awards_set_d_004",
+        "awards_set_d_005",
+        "awards_set_e_002",  
+        "awards_set_e_003",
+        "awards_set_e_004",
+        "awards_set_e_006",
+        "awards_set_e_007",
+        "awards_set_e_008",
+        "awards_set_e_009",
+        "awards_set_e_010",
+        "awards_set_e_011",
+        "awards_set_e_012",
+        "awards_set_e_013",
+        "awards_set_f_001",
+        "awards_set_f_002"
     }
-    return iconList[math.random(#iconList)]
+    return awardIcons[math.random(#awardIcons)]
 end
 
 RegisterCommand("bln_notify_allAdvanced", function(source, args, rawCommand)
@@ -138,6 +178,22 @@ TriggerEvent("chat:addSuggestion", "/bln_notify_tip", "Show a TIP notification",
     { name = "icon", help = "Use 'icon' to include a random icon" }
 })
 
+RegisterCommand("bln_notify_template", function(source, args, rawCommand)
+    local options = {
+        title = args[2],
+    }
+    if args[3] then
+        options.description = args[3]
+    end
+    TriggerEvent(resourceName .. ":send", options, args[1])
+end, false)
+
+TriggerEvent("chat:addSuggestion", "/bln_notify_template", "Run notification from template", {
+    { name = "templateName", help = "Template name like (SUCCESS, TIP,...)" },
+    { name = "title", help = "Title of notification." },
+    { name = "description", help = "Description for notification (optional)." }
+})
+
 print("BLN Notify Advanced Examples loaded. Use the following commands to test:")
 print("/bln_notify_allAdvanced [RTL]")
 print("/bln_notify_allTips [RTL] [icon]")
@@ -146,3 +202,4 @@ print("/bln_notify_success [placement]")
 print("/bln_notify_error [placement]")
 print("/bln_notify [placement]")
 print("/bln_notify_tip [placement] [icon]")
+print("/bln_notify_template [templateName] [title] [description]")

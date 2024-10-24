@@ -39,6 +39,51 @@
     font-weight: 300
 }
 
+@keyframes iconFlip {
+    0% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(360deg);
+    }
+    100% {
+        transform: rotateY(720deg);
+    }
+}
+
+@keyframes textSlideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textFadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
 .notification-container {
     position: fixed;
     z-index: 9999;
@@ -106,6 +151,8 @@
     align-items: center;
     margin-bottom: 0.5rem;
     pointer-events: auto;
+    will-change: transform;
+    transform-origin: center center;
 }
 
 .notification.with-bg {
@@ -120,7 +167,8 @@
 }
 
 .notification.without-bg {
-    text-shadow: 0px 0px 0px rgba(0, 0, 0, 1), 1px 1px 5px rgba(0, 0, 0, 1);
+    flex-direction: row-reverse;
+    text-shadow: 0px 0px 0px rgba(0, 0, 0, 1), 1px 1px 3px rgba(0, 0, 0, 1);
 }
 
 .notification-content {
@@ -128,6 +176,7 @@
     margin-right: 1rem;
     display: flex;
     align-items: center;
+    will-change: transform, opacity;
 }
 
 .notification-content.with-description {
@@ -145,6 +194,16 @@
     height: 60px;
     margin-right: 1.2rem;
     flex-shrink: 0;
+    animation: iconFlip 0.9s ease-out;
+    will-change: transform;
+    transform-style: preserve-3d;
+    backface-visibility: visible;
+}
+
+.notification.without-bg .notification-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
 }
 
 .notification.rtl .notification-icon {
@@ -156,11 +215,12 @@
     margin-bottom: 0;
     font-size: 1.2em;
     font-family: 'Crock';
+    animation: textSlideDown 0.3s ease-out;
+    will-change: transform, opacity;
 }
 
 .notification.without-bg .notification-title {
     font-size: 1em;
-    font-weight: normal;
     font-weight: 600;
     font-family: 'Hapna';
 }
@@ -174,6 +234,8 @@
     font-family: 'Hapna';
     font-size: 1em;
     opacity: 0.8;
+    animation: textSlideUp 0.3s ease-out;
+    will-change: transform, opacity;
 }
 
 .notification.align-start {
@@ -203,149 +265,64 @@
     justify-content: center;
 }
 
-
 @keyframes jellyInRight {
-    0% {
-        transform: translateX(120%);
-    }
-
-    40% {
-        transform: translateX(-20%);
-    }
-
-    70% {
-        transform: translateX(5%);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
+    0% { transform: translateX(120%); opacity: 0; }
+    10% { opacity: 1; }
+    40% { transform: translateX(-10%); }
+    70% { transform: translateX(3%); }
+    100% { transform: translateX(0); }
 }
 
 @keyframes jellyInLeft {
-    0% {
-        transform: translateX(-120%);
-    }
-
-    40% {
-        transform: translateX(20%);
-    }
-
-    70% {
-        transform: translateX(-5%);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
+    0% { transform: translateX(-120%); opacity: 0; }
+    10% { opacity: 1; }
+    40% { transform: translateX(10%); }
+    70% { transform: translateX(-3%); }
+    100% { transform: translateX(0); }
 }
 
 @keyframes jellyInUp {
-    0% {
-        transform: translateY(120%);
-    }
-
-    40% {
-        transform: translateY(-20%);
-    }
-
-    70% {
-        transform: translateY(5%);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
+    0% { transform: translateY(120%); opacity: 0; }
+    10% { opacity: 1; }
+    40% { transform: translateY(-10%); }
+    70% { transform: translateY(3%); }
+    100% { transform: translateY(0); }
 }
 
 @keyframes jellyInDown {
-    0% {
-        transform: translateY(-120%);
-    }
-
-    40% {
-        transform: translateY(20%);
-    }
-
-    70% {
-        transform: translateY(-5%);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
+    0% { transform: translateY(-120%); opacity: 0; }
+    10% { opacity: 1; }
+    40% { transform: translateY(10%); }
+    70% { transform: translateY(-3%); }
+    100% { transform: translateY(0); }
 }
 
 @keyframes jellyOutRight {
-    0% {
-        transform: translateX(0);
-    }
-
-    30% {
-        transform: translateX(-5%);
-    }
-
-    60% {
-        transform: translateX(20%);
-    }
-
-    100% {
-        transform: translateX(120%);
-    }
+    0% { transform: translateX(0); opacity: 1; }
+    30% { transform: translateX(-3%); }
+    60% { transform: translateX(10%); opacity: 1; }
+    100% { transform: translateX(120%); opacity: 0; }
 }
 
 @keyframes jellyOutLeft {
-    0% {
-        transform: translateX(0);
-    }
-
-    30% {
-        transform: translateX(5%);
-    }
-
-    60% {
-        transform: translateX(-20%);
-    }
-
-    100% {
-        transform: translateX(-120%);
-    }
+    0% { transform: translateX(0); opacity: 1; }
+    30% { transform: translateX(3%); }
+    60% { transform: translateX(-10%); opacity: 1; }
+    100% { transform: translateX(-120%); opacity: 0; }
 }
 
 @keyframes jellyOutUp {
-    0% {
-        transform: translateY(0);
-    }
-
-    30% {
-        transform: translateY(5%);
-    }
-
-    60% {
-        transform: translateY(-20%);
-    }
-
-    100% {
-        transform: translateY(-120%);
-    }
+    0% { transform: translateY(0); opacity: 1; }
+    30% { transform: translateY(3%); }
+    60% { transform: translateY(-10%); opacity: 1; }
+    100% { transform: translateY(-120%); opacity: 0; }
 }
 
 @keyframes jellyOutDown {
-    0% {
-        transform: translateY(0);
-    }
-
-    30% {
-        transform: translateY(-5%);
-    }
-
-    60% {
-        transform: translateY(20%);
-    }
-
-    100% {
-        transform: translateY(120%);
-    }
+    0% { transform: translateY(0); opacity: 1; }
+    30% { transform: translateY(-3%); }
+    60% { transform: translateY(10%); opacity: 1; }
+    100% { transform: translateY(120%); opacity: 0; }
 }
 
 .jelly-enter-active {
@@ -356,6 +333,11 @@
 .jelly-leave-active {
     animation-duration: 0.3s;
     animation-fill-mode: both;
+}
+
+.jelly-leave-active .notification-title,
+.jelly-leave-active .notification-description {
+    animation: textFadeOut 0.3s ease-in forwards;
 }
 
 .jelly-enter-active.top-right,

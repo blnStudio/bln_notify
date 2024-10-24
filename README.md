@@ -1,6 +1,10 @@
 # BLN Notify
 
-<img src="./cover.png" alt="bln notify script - redm" width="100%" />
+<img src="./_github/cover.png" alt="bln notify script - redm" width="100%" />
+<div style="display: flex; justify-content: space-between;">
+    <img src="./_github/demo1.gif" alt="Image 1" width="45%" />
+    <img src="./_github/demo2.gif" alt="Image 2" width="45%" />
+</div>
 
 A standalone, flexible, and customizable notification system for RedM servers.
 
@@ -12,6 +16,7 @@ A standalone, flexible, and customizable notification system for RedM servers.
 - 📚 Predefined templates for easily reusable notifications
 - 🧭 Support for all directions (9 placement options)
 - 📱 Responsive design for various screen sizes
+- 🎵 Customizable notification sounds.
 - 🎛️ Support for both advanced and simple notifications
 - 🌈 Customizable colors for title and description
 - 🖼️ Option to use background or transparent notifications
@@ -95,12 +100,15 @@ The `options` table can include the following properties:
 | title | Title of the notification | "Notification" | Required |
 | description | Description text for the notification | null | Optional |
 | duration | Time in milliseconds before the notification is automatically removed | 5000 | Optional |
-| icon | Icon name (details bellow) or URL for the notification | null | Optional |
+| icon | Icon name (only icon name from `ui/imgs/icons/`) or full URL (external url or resource url) | null | Optional |
 | useBackground | Whether to use the background image | true | Optional |
 | contentAlignment | Alignment of the content | "start" | Optional |
 | isRTL | Right-to-left text direction | false | Optional |
 | titleColor | Custom color for the title | undefined | Optional |
 | descriptionColor | Custom color for the description | undefined | Optional |
+| customSound | Custom notification sound, object takes two props `sound` and `soundSet` | sound=`INFO_HIDE`, soundSet=`Ledger_Sounds` | Optional |
+
+NOTE: a list of sounds can be found [here](https://github.com/femga/rdr3_discoveries/blob/master/audio/frontend_soundsets/frontend_soundsets.lua) 
 
 ### Templates
 
@@ -109,7 +117,11 @@ Predefined templates are available in the `Config.Templates` by default:
 - `INFO`
 - `SUCCESS`
 - `ERROR`
+- `REWARD_MONEY`
 - `TIP`
+- `TIP_XP`
+- `TIP_GOLD`
+- `TIP_CASH`
 
 You can use these templates by passing the template name as the second argument in the TriggerEvent call. You can create as many templates as you want in `config.lua` to easily reuse them later.
 
@@ -134,28 +146,6 @@ Available content alignment options are:
 - "start"
 - "center"
 - "end"
-
-### Icon Options
-
-Icons can be specified in two ways:
-1. Using a full URL path to an image
-2. Using an icon hashname from the RDR3 discoveries repository
-
-When using an icon hashname, you can reference icons from this list:
-https://github.com/femga/rdr3_discoveries/blob/master/useful_info_from_rpfs/textures/ui_textures_mp____part1/README.md#inventory_items_mp-0xdeb345d8
-
-use `hashname` only from `inventory_items_mp` list.
-
-#### Example on icons
-```lua
-
-icon = "generic_list", -- hashname.
-OR 
-icon = "nui://resource_name/imgs/example.png",
-OR
-icon = "https://example.com/path/to/imgs/example.png",
-
-```
 
 ### Advanced Example
 
@@ -187,6 +177,7 @@ The following commands are available for testing the notification system:
 - `/bln_notify_error [placement]`: Show an ERROR notification
 - `/bln_notify [placement]`: Show a custom notification
 - `/bln_notify_tip [placement] [icon]`: Show a TIP notification
+- `/bln_notify_template [templateName] [title] [description]`: Show notification from template.
 
 These commands are defined in the `client/_Examples.lua` file and include chat suggestions for ease of use.
 
