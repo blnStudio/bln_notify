@@ -1,9 +1,9 @@
 # BLN Notify
 
-<img src="./_github/cover.png" alt="bln notify script - redm" width="100%" />
+<img src="./.github/assets/banner.png" alt="bln notify script - redm" width="100%" />
 <div style="display: flex; justify-content: space-between;">
-    <img src="./_github/demo1.gif" alt="Image 1" width="45%" />
-    <img src="./_github/demo2.gif" alt="Image 2" width="45%" />
+    <img src="./.github/assets/demo1.gif" alt="Image 1" width="45%" />
+    <img src="./.github/assets/demo2.gif" alt="Image 2" width="45%" />
 </div>
 
 A standalone, flexible, and customizable notification system for RedM servers.
