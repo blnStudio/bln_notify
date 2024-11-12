@@ -13,7 +13,7 @@
 
 A standalone, flexible, and customizable notification system for RedM servers.
 
-[Video Preview](https://youtu.be/qHOM49tz3QE)
+[Video Preview](https://youtu.be/kRLAsFJ-nSk)
 
 ## ✨ Features
 
