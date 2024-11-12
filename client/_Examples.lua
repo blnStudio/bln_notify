@@ -1,5 +1,3 @@
-local resourceName = GetCurrentResourceName()
-
 local placements = {
     "top-right",
     "top-center",
@@ -66,20 +64,68 @@ local function GetRandomIcon()
     return awardIcons[math.random(#awardIcons)]
 end
 
+-- --------------------------------
+-- All Advanced
+-- --------------------------------
+
+local function GetRandomColor()
+    local colors = {
+       "#fcba03", "#ffb86b"
+    }
+    return colors[math.random(#colors)]
+end
+
+local function GetRandomImage()
+    local images = {
+        "leaderboard_cash", "leaderboard_gold", "leaderboard_xp", "warning"
+    }
+    return images[math.random(#images)]
+end
+
+local function AddRandomStyling(text)
+    local shouldAddColor = math.random() < 0.7
+    local shouldAddImage = math.random() < 0.5
+    local styledText = text
+    if shouldAddColor then
+        styledText = 'This is a description. ' .. "~" .. GetRandomColor() .. "~" .. styledText .. "~e~"
+    end
+    
+    if shouldAddImage then
+        styledText = styledText .. "~img:" .. GetRandomImage() .. "~ "
+    end
+    
+    return styledText
+end
+
 RegisterCommand("bln_notify_allAdvanced", function(source, args, rawCommand)
-    local title = "Notification!"
-    local description = "This is a test notification for all placements. We can also specify direction in this command."
+    local baseTitle = "Notification ~#ffcc00~Title!~e~"
+    local baseDescription = "This is a custom color."
 
     for _, placement in ipairs(placements) do
+        local styledTitle = baseTitle
+        local styledDescription = AddRandomStyling(baseDescription)
+        
         local options = {
-            title = title,
-            description = description,
+            title = styledTitle,
+            description = styledDescription,
             icon = GetRandomIcon(),
             placement = placement,
             isRTL = args[1] == 'RTL',
+            keyActions = {
+                E = { 
+                    action = "test_action",
+                    closeOnPress = true
+                }
+            },
+            progress = {
+                enabled = true,
+                type = math.random() < 0.5 and 'bar' or 'circle',
+                color = GetRandomColor()
+            },
+            duration = 10000,
         }
         
-        TriggerEvent(resourceName .. ":send", options)
+        TriggerEvent("bln_notify:send", options)
         
         Citizen.Wait(100)
     end
@@ -89,8 +135,11 @@ TriggerEvent("chat:addSuggestion", "/bln_notify_allAdvanced", "Show notification
     { name = "direction", help = "Use 'RTL' for right-to-left text direction" }
 })
 
+-- --------------------------------
+-- All Tips
+-- --------------------------------
 RegisterCommand("bln_notify_allTips", function(source, args, rawCommand)
-    local title = "This is a tip from BLN Notify!"
+    local title = "This is a tip ~img:mp_roles_bounty_hunter_tier~ from ~#ffcc00~BLN Notify~e~!"
 
     for _, placement in ipairs(placements) do
         local options = {
@@ -100,92 +149,77 @@ RegisterCommand("bln_notify_allTips", function(source, args, rawCommand)
             icon = args[2] == 'icon' and GetRandomIcon(),
         }
         
-        TriggerEvent(resourceName .. ":send", options, 'TIP')
+        TriggerEvent("bln_notify:send", options, 'TIP')
         
         Citizen.Wait(100)
     end
 end, false)
-
 TriggerEvent("chat:addSuggestion", "/bln_notify_allTips", "Show tip notifications in all placements", {
     { name = "direction", help = "Use 'RTL' for right-to-left text direction" },
     { name = "icon", help = "Use 'icon' to include a random icon" }
 })
 
-RegisterCommand("bln_notify_info", function(source, args, rawCommand)
-    local description = "This is an INFO notification."
-    local options = {
-        placement = args[1] or 'middle-right',
-        description = description,
-    }
-    TriggerEvent(resourceName .. ":send", options, "INFO")
-end, false)
-
-TriggerEvent("chat:addSuggestion", "/bln_notify_info", "Show an INFO notification", {
-    { name = "placement", help = "Notification placement (e.g., 'middle-right')" }
-})
-
-RegisterCommand("bln_notify_success", function(source, args, rawCommand)
-    local description = "This is a SUCCESS notification."
-    local options = {
-        placement = args[1] or 'middle-right',
-        description = description
-    }
-    TriggerEvent(resourceName .. ":send", options, "SUCCESS")
-end, false)
-
-TriggerEvent("chat:addSuggestion", "/bln_notify_success", "Show a SUCCESS notification", {
-    { name = "placement", help = "Notification placement (e.g., 'middle-right')" }
-})
-
-RegisterCommand("bln_notify_error", function(source, args, rawCommand)
-    local description = "This is an ERROR notification."
-    local options = {
-        placement = args[1] or 'middle-right',
-        description = description
-    }
-    TriggerEvent(resourceName .. ":send", options, "ERROR")
-end, false)
-
-TriggerEvent("chat:addSuggestion", "/bln_notify_error", "Show an ERROR notification", {
-    { name = "placement", help = "Notification placement (e.g., 'middle-right')" }
-})
-
+-- --------------------------------
+-- bln_notify
+-- --------------------------------
 RegisterCommand("bln_notify", function(source, args, rawCommand)
-    local options = {
-        title = 'Hello!',
-        description = "This is a TIP notification.",
-        icon = GetRandomIcon(),
-        placement = args[1] or 'middle-right',
+    local defaultPlacement = "middle-right"
+    local defaultTitle = "~#ffcc00~Notification~e~"
+    local defaultTitleRTL = "~#ffcc00~عنوان~e~ الاشعار"
+    local defaultDesc = "This is a ~#4CAF50~sample~e~ notification, with a ~img:mp_roles_collector_tier~ custom icon."
+    local defaultDescRTL = "هذا هو ~#4CAF50~نموذج~e~ للإشعار، مع ~img:mp_roles_collector_tier~ أيقونة مخصصة."
+    local defaultIcon = "mp_roles_trader_tier"
+    
+    local validPlacements = {
+        ["top-right"] = true,
+        ["top-center"] = true,
+        ["top-left"] = true,
+        ["middle-right"] = true,
+        ["middle-center"] = true,
+        ["middle-left"] = true,
+        ["bottom-right"] = true,
+        ["bottom-center"] = true,
+        ["bottom-left"] = true
     }
-    TriggerEvent(resourceName .. ":send", options)
+
+    local isRTL = args[1] == 'rtl'
+    local title, desc = '', ''
+    if isRTL then
+        title = defaultTitleRTL
+        desc = defaultDescRTL
+    else
+        title = defaultTitle
+        desc = defaultDesc
+    end
+
+    local options = {
+        isRTL = isRTL,
+        title = args[2] or title,
+        description = args[3] or desc,
+        icon = args[4] or defaultIcon,
+        placement = (args[5] and validPlacements[args[5]] and args[5]) or defaultPlacement,
+    }
+
+    TriggerEvent("bln_notify:send", options)
 end, false)
 
 TriggerEvent("chat:addSuggestion", "/bln_notify", "Show a custom notification", {
-    { name = "placement", help = "Notification placement (e.g., 'middle-right')" }
+    {name = "isRTL", help = "Use 'RTL' for right-to-left text direction"},
+    { name = "title", help = "Notification title (supports colors with ~color~ or ~#hex~)" },
+    { name = "description", help = "Description (supports colors and images with ~img:name~)" },
+    { name = "icon", help = "Main notification icon name" },
+    { name = "placement", help = "Position: [top/middle/bottom]-[left/center/right]" }
 })
 
-RegisterCommand("bln_notify_tip", function(source, args, rawCommand)
-    local options = {
-        title = 'This is a TIP notification.',
-        placement = args[1] or 'middle-right',
-        icon = args[2] == 'icon' and GetRandomIcon(),
-    }
-    TriggerEvent(resourceName .. ":send", options, "TIP")
-end, false)
-
-TriggerEvent("chat:addSuggestion", "/bln_notify_tip", "Show a TIP notification", {
-    { name = "placement", help = "Notification placement (e.g., 'middle-right')" },
-    { name = "icon", help = "Use 'icon' to include a random icon" }
-})
-
+-- --------------------------------
+-- template example
+-- --------------------------------
 RegisterCommand("bln_notify_template", function(source, args, rawCommand)
     local options = {
         title = args[2],
     }
-    if args[3] then
-        options.description = args[3]
-    end
-    TriggerEvent(resourceName .. ":send", options, args[1])
+    options.description = args[3] or 'This is a description example.'
+    TriggerEvent("bln_notify:send", options, args[1])
 end, false)
 
 TriggerEvent("chat:addSuggestion", "/bln_notify_template", "Run notification from template", {
@@ -194,12 +228,53 @@ TriggerEvent("chat:addSuggestion", "/bln_notify_template", "Run notification fro
     { name = "description", help = "Description for notification (optional)." }
 })
 
-print("BLN Notify Advanced Examples loaded. Use the following commands to test:")
-print("/bln_notify_allAdvanced [RTL]")
-print("/bln_notify_allTips [RTL] [icon]")
-print("/bln_notify_info [placement]")
-print("/bln_notify_success [placement]")
-print("/bln_notify_error [placement]")
-print("/bln_notify [placement]")
-print("/bln_notify_tip [placement] [icon]")
-print("/bln_notify_template [templateName] [title] [description]")
+-- --------------------------------
+-- progress notify example
+-- --------------------------------
+RegisterCommand("bln_notify_progress", function(source, args, rawCommand)
+    local options = {
+        title = "Information ~#ffcd02~title~e~",
+        description = "This is a description with ~#ffcc00~custom color~e~.",
+        icon = "warning",
+        duration = 10000,
+        placement = 'middle-left',
+        progress = {
+            enabled = true,
+            type = args[1] or 'bar',
+            color = '#ffcc00'
+        }
+    }
+    TriggerEvent("bln_notify:send", options)
+end, false)
+
+TriggerEvent("chat:addSuggestion", "/bln_notify_progress", "Run notification with progress", {
+    { name = "type", help = "Progress type [bar], [circle]" },
+})
+
+-- --------------------------------
+-- keyActions notify example
+-- --------------------------------
+RegisterCommand("bln_notify_key", function(source, args, rawCommand)
+    local options = {
+        title = "Key Notify ~#ffcd02~title~e~",
+        description = "This is a description with ~#ffcc00~custom color~e~. Press ~key:ENTER~ to Accept, ~key:F6~ to decline.",
+        icon = "warning",
+        duration = 10000,
+        placement = 'middle-left',
+        keyActions = {
+            ['ENTER'] = "accept", -- `accept` is action name.
+            ['F6'] = "decline" 
+        }
+    }
+    TriggerEvent("bln_notify:send", options)
+end, false)
+
+TriggerEvent("chat:addSuggestion", "/bln_notify_key", "Run notification with key", {
+    { name = "key", help = "key" },
+})
+
+-- Listen event for key press of our notification
+RegisterNetEvent("bln_notify:keyPressed")
+AddEventHandler("bln_notify:keyPressed", function(action)
+    print("Key pressed: " .. action)
+end)

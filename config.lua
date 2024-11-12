@@ -5,11 +5,9 @@ Config.Templates = {
     -- Advanced notification templates
     -- ----------------------------
     INFO = {
-        title = "Information",
+        title = "~#3c9ce6~Information~e~",
         icon = "warning",
         duration = 5000,
-        titleColor = "#FFFFFF",
-        descriptionColor = "#CCCCCC",
         placement = 'middle-left',
         customSound = {
             sound = "INFO",
@@ -17,11 +15,9 @@ Config.Templates = {
         }
     },
     SUCCESS = {
-        title = "Success",
+        title = "~#73f75c~Success!~e~",
         icon = "tick",
         duration = 5000,
-        titleColor = "#00FF00",
-        descriptionColor = "#CCFFCC",
         placement = 'middle-left',
         customSound = {
             sound = "CHECKPOINT_PERFECT",
@@ -29,11 +25,9 @@ Config.Templates = {
         }
     },
     ERROR = {
-        title = "Error",
+        title = "~#f73434~Failed!~e~",
         icon = "cross",
         duration = 7000,
-        titleColor = "#FF0000",
-        descriptionColor = "#FFCCCC",
         placement = 'middle-left',
         customSound = {
             sound = "FAIL",
@@ -41,7 +35,7 @@ Config.Templates = {
         }
     },
     REWARD_MONEY = {
-        title = "Here's your reward!",
+        title = "~#ffcc00~Here's your reward!~e~",
         icon = 'toast_mp_daily_objective_small',
         duration = 7000,
         placement = 'middle-left',

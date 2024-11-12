@@ -3,7 +3,7 @@ fx_version "adamant"
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 games {"rdr3"}
 
-version '1.2.0'
+version '2.0.0'
 author 'BLN Studio - RedM'
 
 lua54 'yes'
@@ -18,7 +18,8 @@ files {
     'ui/index.html',
     'ui/**/**/*.png',
     'ui/**/**/*.ttf',
-    'ui/**/**/*.css'
+    'ui/**/**/*.css',
+    'ui/**/**/*.js'
 }
 
 shared_scripts {
