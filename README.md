@@ -2,9 +2,9 @@
 
 <img src="./.github/assets/banner.png" alt="bln notify script - redm" width="100%" />
 <div style="display: flex; justify-content: space-between;">
-    <img src="./.github/assets/demo/status.gif" alt="Image 1" width="33%" />
-    <img src="./.github/assets/demo/keybind.gif" alt="Image 2" width="33%" />
-    <img src="./.github/assets/demo/progress.gif" alt="Image 3" width="33%" />
+    <img src="./.github/assets/demo/status.gif" alt="Image 1" width="30%" />
+    <img src="./.github/assets/demo/keybind.gif" alt="Image 2" width="30%" />
+    <img src="./.github/assets/demo/progress.gif" alt="Image 3" width="30%" />
 </div>
 <div style="display: flex; justify-content: space-between;">
     <img src="./.github/assets/demo/tip.gif" alt="Image 1" width="45%" />
