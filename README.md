@@ -91,7 +91,7 @@ TriggerEvent("bln_notify:send", {
 | title | Title of the notification | "Notification" | Required |
 | description | Description text for the notification | null | Optional |
 | duration | Time in milliseconds before auto-removal | 5000 | Optional |
-| icon | [Icon name]('./ui/assets/imgs/icons') or URL | null | Optional |
+| icon | [Icon name]('https://github.com/blnStudio/bln_notify/tree/main/ui/assets/imgs/icons') or URL | null | Optional |
 | useBackground | Whether to use background image | true | Optional |
 | contentAlignment | Content alignment | "start" | Optional |
 | isRTL | Right-to-left text direction | false | Optional |
@@ -151,7 +151,7 @@ Can add color anywhere in your text (title or description).
 
 #### Image Formatting
 You can add inline images/icons to notification's description as follows:
-- [Icon name]('./ui/assets/imgs/icons') or URL, e.g. `~img:icon_name~` or `~img:full_url~`,
+- [Icon name]('https://github.com/blnStudio/bln_notify/tree/main/ui/assets/imgs/icons') or URL, e.g. `~img:icon_name~` or `~img:full_url~`,
 
 
 ### Templates
