@@ -178,7 +178,7 @@ Test commands available in game:
 
 ## Support
 
-For help and support, join our [Discord](discord.com/invite/MEZRYQVpnt) or create an issue on GitHub.
+For help and support, join our [Discord](https://discord.com/invite/MEZRYQVpnt) or create an issue on GitHub.
 
 ## Contributing
 
