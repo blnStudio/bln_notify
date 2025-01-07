@@ -174,7 +174,6 @@ Test commands available in game:
 - `/bln_notify_template [template] [title] [desc]`: Test templates
 - `/bln_notify [RTL] [title] [desc] [icon] [placement]`: Custom notification
 
-[Previous sections about placement options, content alignment, etc. remain the same...]
 
 ## Support
 
