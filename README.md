@@ -43,7 +43,7 @@ To send a notification from the client-side:
 
 ```lua
 TriggerEvent("bln_notify:send", options)
--- OR
+-- OR with template
 TriggerEvent("bln_notify:send", options, template)
 ```
 
@@ -82,6 +82,46 @@ TriggerEvent("bln_notify:send", {
     }
 })
 ```
+
+### Server-Side Usage
+
+To send a notification from the server-side:
+
+```lua
+-- Send to specific player
+TriggerClientEvent("bln_notify:send", source, options)
+-- OR with template
+TriggerClientEvent("bln_notify:send", source, options, template)
+
+
+-- Send to all players
+TriggerClientEvent("bln_notify:send", -1, options)
+-- OR with template
+TriggerClientEvent("bln_notify:send", -1, options, template)
+```
+
+The notification options are exactly the same as in client-side examples. The only difference is that on the server-side you need to:
+1. Use `TriggerClientEvent` instead of `TriggerEvent` to target a client.
+2. Provide the `source` (player id) as the second parameter
+3. Use `-1` as the source to send to all players
+
+#### Example
+```lua
+-- Server-side
+TriggerClientEvent("bln_notify:send", source, {
+    title = "Hello!",
+    description = "This is a notification",
+    placement = "middle-right"
+})
+
+-- To all players
+TriggerClientEvent("bln_notify:send", -1, {
+    title = "Server Announcement",
+    description = "This goes to everyone",
+    placement = "top-right"
+}, "INFO")
+```
+
 
 ### Notification Options
 
