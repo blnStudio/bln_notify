@@ -209,7 +209,7 @@
 }
 
 .notification.without-bg .notification-title {
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 600;
     font-family: 'Hapna';
 }
@@ -246,6 +246,11 @@
     margin: 0 2px;
     position: relative;
     top: -0.1em;
+}
+
+.notification.without-bg .inline-image {
+    width: 45px;
+    height: 45px;
 }
 
 .notification.without-bg.ltr.top-right .notification-content,
