@@ -11,9 +11,15 @@
     <img src="./.github/assets/demo/rtl.gif" alt="Image 2" width="45%" />
 </div>
 
+
+
 A standalone, flexible, and customizable notification system for RedM servers.
 
-[Video Preview](https://youtu.be/kRLAsFJ-nSk)
+[![](https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=youtube&logoColor=white)](https://youtu.be/kRLAsFJ-nSk)
+[![Discord](https://img.shields.io/badge/Discord-1111?style=flat&logo=discord&logoColor=white&color=7289da)](https://discord.bln-studio.com/)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/blnStudio/bln_notify)
+![License](https://img.shields.io/github/license/blnStudio/bln_notify)
+
 
 ## ✨ Features
 
