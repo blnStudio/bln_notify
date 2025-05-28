@@ -56,28 +56,81 @@
 @keyframes textFadeIn {
     0% {
         opacity: 0;
+        transform: translateY(10px);
+    }
+
+    30% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    60% {
+        opacity: 0.3;
+        transform: translateY(4px);
     }
 
     100% {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
 @keyframes textFadeOut {
     0% {
         opacity: 1;
+        transform: translateY(0);
     }
 
     100% {
         opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes iconFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) rotateY(0deg);
+    }
+
+    25% {
+        opacity: 0;
+        transform: scale(0.85) rotateY(90deg);
+    }
+
+    50% {
+        opacity: 0.2;
+        transform: scale(0.9) rotateY(180deg);
+    }
+
+    75% {
+        opacity: 0.6;
+        transform: scale(0.95) rotateY(270deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateY(360deg);
+    }
+}
+
+@keyframes iconFadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.8) rotateY(-180deg);
     }
 }
 
 .notification-container {
     position: fixed;
-    z-index: 9999;
+    z-index: 99999999;
     pointer-events: none;
-    width: 420px;
+    width: 520px;
     max-width: 90%;
     transition: all 0.3s ease-in-out;
 }
@@ -184,7 +237,6 @@
     height: 60px;
     margin-right: 1.2rem;
     flex-shrink: 0;
-    animation: iconFlip 0.9s ease-out;
     will-change: transform;
     transform-style: preserve-3d;
     backface-visibility: visible;
@@ -270,7 +322,7 @@
 
 @keyframes jellyInRight {
     0% {
-        transform: translateX(120%);
+        transform: translateX(150%);
         opacity: 0;
     }
 
@@ -279,11 +331,11 @@
     }
 
     40% {
-        transform: translateX(-10%);
+        transform: translateX(-15%);
     }
 
     70% {
-        transform: translateX(3%);
+        transform: translateX(5%);
     }
 
     100% {
@@ -293,7 +345,7 @@
 
 @keyframes jellyInLeft {
     0% {
-        transform: translateX(-120%);
+        transform: translateX(-150%);
         opacity: 0;
     }
 
@@ -302,11 +354,11 @@
     }
 
     40% {
-        transform: translateX(10%);
+        transform: translateX(15%);
     }
 
     70% {
-        transform: translateX(-3%);
+        transform: translateX(-5%);
     }
 
     100% {
@@ -316,7 +368,7 @@
 
 @keyframes jellyInUp {
     0% {
-        transform: translateY(120%);
+        transform: translateY(150%);
         opacity: 0;
     }
 
@@ -325,11 +377,11 @@
     }
 
     40% {
-        transform: translateY(-10%);
+        transform: translateY(-15%);
     }
 
     70% {
-        transform: translateY(3%);
+        transform: translateY(5%);
     }
 
     100% {
@@ -339,7 +391,7 @@
 
 @keyframes jellyInDown {
     0% {
-        transform: translateY(-120%);
+        transform: translateY(-150%);
         opacity: 0;
     }
 
@@ -348,11 +400,11 @@
     }
 
     40% {
-        transform: translateY(10%);
+        transform: translateY(15%);
     }
 
     70% {
-        transform: translateY(-3%);
+        transform: translateY(-5%);
     }
 
     100% {
@@ -444,19 +496,56 @@
     }
 }
 
+@keyframes jellyOutCenter {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    30% {
+        transform: scale(1.05);
+    }
+
+    60% {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
 .jelly-enter-active {
     animation-duration: 0.3s;
     animation-fill-mode: both;
 }
 
+.jelly-enter-active .notification-title,
+.jelly-enter-active .notification-description {
+    opacity: 0;
+    animation: textFadeIn 1.2s ease-out 0.4s forwards;
+}
+
+.jelly-enter-active .notification-icon {
+    opacity: 0;
+    animation: iconFadeIn 1.3s ease-out 0.35s forwards;
+}
+
 .jelly-leave-active {
-    animation-duration: 0.3s;
+    animation-duration: 0.6s;
     animation-fill-mode: both;
+    animation-delay: 0.4s;
 }
 
 .jelly-leave-active .notification-title,
 .jelly-leave-active .notification-description {
-    animation: textFadeOut 0.9s ease-in forwards;
+    animation: textFadeOut 0.3s ease-in forwards;
+}
+
+.jelly-leave-active .notification-icon {
+    animation: iconFadeOut 0.3s ease-in forwards;
 }
 
 .jelly-enter-active.top-right,
@@ -476,7 +565,7 @@
 }
 
 .jelly-enter-active.middle-center {
-    animation-name: jellyInLeft;
+    animation-name: jellyInCenter;
 }
 
 .jelly-enter-active.bottom-center {
@@ -500,7 +589,7 @@
 }
 
 .jelly-leave-active.middle-center {
-    animation-name: jellyOutLeft;
+    animation-name: jellyOutCenter;
 }
 
 .jelly-leave-active.bottom-center {
@@ -610,4 +699,77 @@
 .key-active {
     animation: keyPulse 0.5s ease infinite;
     background: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes jellyInCenter {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    40% {
+        transform: scale(1.15);
+    }
+
+    70% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.jelly-enter-active.without-bg {
+    animation: tipContainerSlideUp 0.6s ease-out forwards !important;
+}
+
+.jelly-leave-active.without-bg {
+    animation: tipContainerFadeOut 0.4s ease-in forwards !important;
+}
+
+.jelly-enter-active.without-bg .notification-title,
+.jelly-enter-active.without-bg .notification-description {
+    opacity: 1 !important;
+    animation: none !important;
+}
+
+.jelly-enter-active.without-bg .notification-icon {
+    opacity: 1 !important;
+    animation: none !important;
+}
+
+.jelly-leave-active.without-bg .notification-title,
+.jelly-leave-active.without-bg .notification-description {
+    animation: none !important;
+}
+
+.jelly-leave-active.without-bg .notification-icon {
+    animation: none !important;
+}
+
+@keyframes tipContainerSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes tipContainerFadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
 }

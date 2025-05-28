@@ -5,7 +5,7 @@ local resourceName = GetCurrentResourceName()
 -- --------------------------------------------------------
 local activeNotifications = {}
 
-local function RegisterNotificationKeys(notificationId, keyActions)
+local function RegisterNotificationKeys(notificationId, keyActions, placement)
     if not keyActions then return end
     
     local validKeyActions = {}
@@ -23,7 +23,8 @@ local function RegisterNotificationKeys(notificationId, keyActions)
     
     activeNotifications[notificationId] = {
         keyActions = validKeyActions,
-        active = true
+        active = true,
+        placement = placement
     }
 end
 
@@ -44,7 +45,8 @@ CreateThread(function()
                         SendNUIMessage({
                             type = 'BLN_NOTIFY_KEY_PRESSED',
                             notificationId = notificationId,
-                            key = keyData.keyName
+                            key = keyData.keyName,
+                            placement = data.placement
                         })
                         TriggerEvent('bln_notify:keyPressed', keyData.action)
                     end
@@ -75,12 +77,12 @@ local function SendNotification(options, template)
         finalOptions[k] = v
     end
 
-    local notificationId = math.random(1000000)
+    local notificationId = GetGameTimer() .. math.random(1000000) .. GetPlayerServerId(PlayerId())
     
-    options.id = notificationId
+    finalOptions.id = notificationId
     
-    if options.keyActions then
-        RegisterNotificationKeys(notificationId, options.keyActions)
+    if finalOptions.keyActions then
+        RegisterNotificationKeys(notificationId, finalOptions.keyActions, finalOptions.placement)
     end
 
     SendNUIMessage({
