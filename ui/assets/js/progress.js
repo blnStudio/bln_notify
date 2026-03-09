@@ -50,17 +50,38 @@ Vue.component('circle-progress', {
     props: {
       progress: Number,
       duration: Number,
-      color: String
+      color: String,
+      segments: {
+        type: Number,
+        default: 16
+      }
+    },
+    computed: {
+      safeSegmentCount() {
+        return Math.max(1, this.segments || 16);
+      },
+      clampedProgress() {
+        return Math.max(0, Math.min(1, this.progress || 0));
+      },
+      fillStyle() {
+        const hiddenRightPercent = (1 - this.clampedProgress) * 100;
+        return {
+          clipPath: `inset(0 ${hiddenRightPercent}% 0 0)`,
+          WebkitClipPath: `inset(0 ${hiddenRightPercent}% 0 0)`,
+          transition: `clip-path ${this.duration}ms linear, -webkit-clip-path ${this.duration}ms linear`,
+        };
+      }
     },
     template: `
       <div class="progress-bar">
-        <div class="progress-bar-fill" 
-          :style="{
-            backgroundColor: color,
-            transform: \`scaleX(\${progress})\`,
-            transition: \`transform \${duration}ms linear\`
-          }"
-        ></div>
+        <div class="progress-bar-fill" :style="fillStyle">
+          <div
+            v-for="segmentIndex in safeSegmentCount"
+            :key="segmentIndex"
+            class="progress-bar-segment"
+            :style="{ '--segment-color': color }"
+          ></div>
+        </div>
       </div>
     `
   });

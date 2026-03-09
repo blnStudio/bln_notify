@@ -50,7 +50,7 @@ new Vue({
 
       const notification = {
         id: id,
-        title: options.title || "Notification",
+        title: options.title || null,
         description: options.description || null,
         icon: options.icon || null,
         useBackground:
@@ -65,6 +65,7 @@ new Vue({
           enabled: options.progress?.enabled ?? false,
           type: options.progress?.type || "bar",
           color: options.progress?.color || "#fff",
+          segments: options.progress?.segments || 16,
           value: 1,
         },
         keyActions: options.keyActions || {},
@@ -82,6 +83,7 @@ new Vue({
             notification.progress.value = 0;
           });
         });
+
         if (notification.progress.type === "circle") {
           const startTime = Date.now();
           const interval = setInterval(() => {

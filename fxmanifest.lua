@@ -12,7 +12,9 @@ lua54 'yes'
 ui_page 'ui/index.html'
 
 client_scripts {
-    'client/*.lua'
+    'client/keys.lua',
+    'client/main.lua',
+    'client/_Examples.lua',
 }
 
 files {

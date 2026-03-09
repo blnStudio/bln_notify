@@ -135,6 +135,16 @@ TriggerEvent("chat:addSuggestion", "/bln_notify_allAdvanced", "Show notification
     { name = "direction", help = "Use 'RTL' for right-to-left text direction" }
 })
 
+RegisterCommand("bln_notify_exports", function(source, args, rawCommand)
+    local options = {
+        title = "This is a title",
+        description = "This is a description",
+        icon = "warning",
+        placement = "top-center",
+    }
+    exports.bln_notify:tip("~img:mp_roles_bounty_hunter_tier~ This is my title")
+end, false)
+
 -- --------------------------------
 -- All Tips
 -- --------------------------------
@@ -237,7 +247,7 @@ RegisterCommand("bln_notify_progress", function(source, args, rawCommand)
         description = "This is a description with ~#ffcc00~custom color~e~.",
         icon = "warning",
         duration = 10000,
-        placement = 'middle-left',
+        placement = 'top-center',
         progress = {
             enabled = true,
             type = args[1] or 'bar',

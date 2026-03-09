@@ -21,7 +21,7 @@
           <img v-if="notification.icon" :src="getIconUrl(notification.icon)" alt="Notification Icon"
             class="notification-icon" />
           <div :class="['notification-content', { 'with-description': notification.description }]">
-            <div class="notification-title">
+            <div class="notification-title" v-if="notification?.title">
               <dynamic-text :text="notification.title"></dynamic-text>
             </div>
             <div v-if="notification.description" class="notification-description">
@@ -34,6 +34,7 @@
               :progress="notification.progress.value"
               :duration="notification.duration"
               :color="notification.progress.color"
+              :segments="notification.progress.segments"
             ></bar-progress>
             <circle-progress
               v-else-if="notification.progress.type === 'circle'"

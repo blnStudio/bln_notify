@@ -4,10 +4,43 @@ local resourceName = GetCurrentResourceName()
 -- Action Keys
 -- --------------------------------------------------------
 local activeNotifications = {}
+local keyLoopRunning = false
+
+local function StartKeyLoop()
+    if keyLoopRunning then return end
+    keyLoopRunning = true
+
+    CreateThread(function()
+        while true do
+            if next(activeNotifications) == nil then
+                keyLoopRunning = false
+                break
+            end
+
+            Wait(0)
+
+            for notificationId, data in pairs(activeNotifications) do
+                if data.active then
+                    for keyHash, keyData in pairs(data.keyActions) do
+                        if IsControlJustPressed(0, keyHash) then
+                            SendNUIMessage({
+                                type = 'BLN_NOTIFY_KEY_PRESSED',
+                                notificationId = notificationId,
+                                key = keyData.keyName,
+                                placement = data.placement
+                            })
+                            TriggerEvent('bln_notify:keyPressed', keyData.action)
+                        end
+                    end
+                end
+            end
+        end
+    end)
+end
 
 local function RegisterNotificationKeys(notificationId, keyActions, placement)
     if not keyActions then return end
-    
+
     local validKeyActions = {}
     for keyName, action in pairs(keyActions) do
         local keyHash = Keys[string.upper(keyName)]
@@ -20,12 +53,14 @@ local function RegisterNotificationKeys(notificationId, keyActions, placement)
             print(string.format("Warning: Invalid key name '%s' for notification", keyName))
         end
     end
-    
+
     activeNotifications[notificationId] = {
         keyActions = validKeyActions,
         active = true,
         placement = placement
     }
+
+    StartKeyLoop()
 end
 
 local function RemoveNotificationKeys(notificationId)
@@ -34,27 +69,6 @@ local function RemoveNotificationKeys(notificationId)
         activeNotifications[notificationId] = nil
     end
 end
-
-CreateThread(function()
-    while true do
-        Wait(0)
-        for notificationId, data in pairs(activeNotifications) do
-            if data.active then
-                for keyHash, keyData in pairs(data.keyActions) do
-                    if IsControlJustPressed(0, keyHash) then
-                        SendNUIMessage({
-                            type = 'BLN_NOTIFY_KEY_PRESSED',
-                            notificationId = notificationId,
-                            key = keyData.keyName,
-                            placement = data.placement
-                        })
-                        TriggerEvent('bln_notify:keyPressed', keyData.action)
-                    end
-                end
-            end
-        end
-    end
-end)
 
 -- --------------------------------------------------------
 -- Notification System
@@ -66,21 +80,21 @@ local function SendNotification(options, template)
     end
 
     local finalOptions = {}
-    
+
     if template and type(template) == "string" and Config.Templates[template] then
         for k, v in pairs(Config.Templates[template]) do
             finalOptions[k] = v
         end
     end
-    
+
     for k, v in pairs(options) do
         finalOptions[k] = v
     end
 
     local notificationId = GetGameTimer() .. math.random(1000000) .. GetPlayerServerId(PlayerId())
-    
+
     finalOptions.id = notificationId
-    
+
     if finalOptions.keyActions then
         RegisterNotificationKeys(notificationId, finalOptions.keyActions, finalOptions.placement)
     end
@@ -98,7 +112,6 @@ local function SendNotification(options, template)
 end
 
 RegisterNuiCallback("playSound", function(data, cb)
-
     if data.sound and data.soundSet then
         PlaySoundFrontend(data.sound, data.soundSet, true, 0)
     else
@@ -114,3 +127,19 @@ AddEventHandler(resourceName .. ":send", function(options, template)
     SendNotification(options, template)
 end)
 
+exports("send", function(options, template)
+    SendNotification(options, template)
+end)
+
+exports("tip", function(message, duration, placement, sound, soundSet)
+    SendNotification({
+        title = message,
+        duration = duration or 5000,
+        placement = placement or 'middle-right',
+        useBackground = false,
+        customSound = {
+            sound = sound or "INFO_SHOW",
+            soundSet = soundSet or "Ledger_Sounds"
+        }
+    })
+end)
