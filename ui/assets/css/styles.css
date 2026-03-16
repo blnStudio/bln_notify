@@ -277,16 +277,16 @@
     opacity: 0.8;
     will-change: transform, opacity;
 }
-
-.notification.align-start {
+.notification-title, .notification-description { width: 100%; }
+.notification.align-start, .notification.align-start .notification-title {
     text-align: start;
 }
 
-.notification.align-center {
+.notification.align-center, .notification.align-center .notification-title {
     text-align: center;
 }
 
-.notification.align-end {
+.notification.align-end, .notification.align-end .notification-title {
     text-align: end;
 }
 

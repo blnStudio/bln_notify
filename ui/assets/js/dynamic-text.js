@@ -18,15 +18,33 @@ Vue.component('dynamic-text', {
         }
     },
     methods: {
+        isValidFontSize(size) {
+            if (!size) return false;
+            return /^-?\d*\.?\d+(px|em|rem|%|pt|vh|vw|vmin|vmax|ch|ex)$/i.test(size.trim());
+        },
+        isValidFontWeight(weight) {
+            if (!weight) return false;
+            const normalized = weight.trim().toLowerCase();
+            if (/^[1-9]00$/.test(normalized)) return true;
+            return ['normal', 'bold', 'bolder', 'lighter'].includes(normalized);
+        },
         parseText() {
             const parts = [];
             let currentText = '';
             let currentColor = null;
+            let currentSize = null;
+            let currentWeight = null;
             let i = 0;
 
             const pushCurrentText = () => {
                 if (currentText) {
-                    parts.push({ type: 'text', text: currentText, color: currentColor });
+                    parts.push({
+                        type: 'text',
+                        text: currentText,
+                        color: currentColor,
+                        size: currentSize,
+                        weight: currentWeight
+                    });
                     currentText = '';
                 }
             };
@@ -54,6 +72,23 @@ Vue.component('dynamic-text', {
                         });
                     } else if (code === 'e') {
                         currentColor = null;
+                        currentSize = null;
+                        currentWeight = null;
+                    } else if (code.startsWith('size:')) {
+                        const sizeData = code.substring(5);
+                        const [rawSize, rawWeight] = sizeData.split('|');
+                        const nextSize = rawSize ? rawSize.trim() : null;
+                        const nextWeight = rawWeight ? rawWeight.trim() : null;
+
+                        if (nextSize && this.isValidFontSize(nextSize)) {
+                            currentSize = nextSize;
+                        }
+
+                        if (nextWeight && this.isValidFontWeight(nextWeight)) {
+                            currentWeight = nextWeight;
+                        } else {
+                            currentWeight = null;
+                        }
                     } else if (code.startsWith('#')) {
                         currentColor = code;
                     } else if (code.startsWith('img:')) {
@@ -136,7 +171,9 @@ Vue.component('dynamic-text', {
                 return h('span', {
                     key: index,
                     style: {
-                        color: part.color
+                        color: part.color,
+                        fontSize: part.size,
+                        fontWeight: part.weight
                     }
                 }, part.text);
             }

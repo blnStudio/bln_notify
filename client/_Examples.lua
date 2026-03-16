@@ -208,6 +208,7 @@ RegisterCommand("bln_notify", function(source, args, rawCommand)
         description = args[3] or desc,
         icon = args[4] or defaultIcon,
         placement = (args[5] and validPlacements[args[5]] and args[5]) or defaultPlacement,
+        contentAlignment = "center"
     }
 
     TriggerEvent("bln_notify:send", options)
