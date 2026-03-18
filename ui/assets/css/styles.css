@@ -277,6 +277,7 @@
     opacity: 0.8;
     will-change: transform, opacity;
 }
+.notification.without-bg .notification-title, .notification.without-bg .notification-description { width: auto !important; }
 .notification-title, .notification-description { width: 100%; }
 .notification.align-start, .notification.align-start .notification-title {
     text-align: start;
