@@ -1,18 +1,21 @@
 # BLN Notify
 
 <img src="./.github/assets/banner.png" alt="bln notify script - redm" width="100%" />
-<div style="display: grid; grid-template-columns: 1fr; gap: 1rem; max-width:100%; margin-bottom: 1rem;margin-top: 1rem;">
-  <img src="./.github/assets/tips.gif" alt="bln notify script - redm" style="width: 100%; display: block;" />
-</div>
-<div style="display: grid; grid-template-columns: 1fr; gap: 1rem; max-width:100%; margin-bottom: 1rem;">
-  <img src="./.github/assets/advanced.gif" alt="bln notify script - redm" style="width: 100%; display: block;" />
-</div>
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width:100%;">
-  <img src="./.github/assets/announce.gif" alt="Tips Demo" style="width: 100%; display: block;" />
-  <img src="./.github/assets/key.gif" alt="RTL Support Demo" style="width: 100%; display: block;" />
-  <img src="./.github/assets/template.gif" alt="Tips Demo" style="width: 100%; display: block;" />
-  <img src="./.github/assets/rtl.gif" alt="RTL Support Demo" style="width: 100%; display: block;" />
-</div>
+
+<img src="./.github/assets/tips.gif" alt="Tips Demo" width="100%" />
+
+<img src="./.github/assets/advanced.gif" alt="Advanced Demo" width="100%" />
+
+<table>
+  <tr>
+    <td width="50%"><img src="./.github/assets/announce.gif" alt="Announce Demo" width="100%" /></td>
+    <td width="50%"><img src="./.github/assets/key.gif" alt="Key Bind Demo" width="100%" /></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="./.github/assets/template.gif" alt="Template Demo" width="100%" /></td>
+    <td width="50%"><img src="./.github/assets/rtl.gif" alt="RTL Support Demo" width="100%" /></td>
+  </tr>
+</table>
 
 A standalone, flexible, and customizable notification system for RedM servers. BLN Notify provides a complete notification solution with support for animations, interactive key bindings, progress indicators, RTL languages, and extensive customization options.
 
