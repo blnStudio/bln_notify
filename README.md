@@ -17,12 +17,16 @@
   </tr>
 </table>
 
+<p align="center">
+  <a href="https://youtu.be/kRLAsFJ-nSk"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=youtube&logoColor=white" alt="Youtube Demo" /></a>
+  <a href="https://discord.bln-studio.com/"><img src="https://img.shields.io/badge/Discord-1111?style=flat-square&logo=discord&logoColor=white&color=7289da" alt="Discord" /></a>
+  <img src="https://img.shields.io/github/v/release/blnStudio/bln_notify?style=flat-square" alt="GitHub release (latest by date)" />
+  <img src="https://img.shields.io/github/license/blnStudio/bln_notify?style=flat-square" alt="License" />
+</p>
+
+
 A standalone, flexible, and customizable notification system for RedM servers. BLN Notify provides a complete notification solution with support for animations, interactive key bindings, progress indicators, RTL languages, and extensive customization options.
 
-[![](https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=youtube&logoColor=white)](https://youtu.be/kRLAsFJ-nSk)
-[![Discord](https://img.shields.io/badge/Discord-1111?style=flat&logo=discord&logoColor=white&color=7289da)](https://discord.bln-studio.com/)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/blnStudio/bln_notify)
-![License](https://img.shields.io/github/license/blnStudio/bln_notify)
 
 ## ✨ Features
 
