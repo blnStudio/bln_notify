@@ -1,17 +1,17 @@
 # BLN Notify
 
-<img src="https://docs.bln-studio.com/bln_notify/banner.png" alt="bln notify script - redm" width="100%" />
+<img src="./.github/assets/banner.png" alt="bln notify script - redm" width="100%" />
 <div style="display: grid; grid-template-columns: 1fr; gap: 1rem; max-width:100%; margin-bottom: 1rem;margin-top: 1rem;">
-  <img src="https://docs.bln-studio.com/bln_notify/tips.gif" alt="bln notify script - redm" style="width: 100%; display: block;" />
+  <img src="./.github/assets/tips.gif" alt="bln notify script - redm" style="width: 100%; display: block;" />
 </div>
 <div style="display: grid; grid-template-columns: 1fr; gap: 1rem; max-width:100%; margin-bottom: 1rem;">
-  <img src="https://docs.bln-studio.com/bln_notify/advanced.gif" alt="bln notify script - redm" style="width: 100%; display: block;" />
+  <img src="./.github/assets/advanced.gif" alt="bln notify script - redm" style="width: 100%; display: block;" />
 </div>
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width:100%;">
-  <img src="https://docs.bln-studio.com/bln_notify/announce.gif" alt="Tips Demo" style="width: 100%; display: block;" />
-  <img src="https://docs.bln-studio.com/bln_notify/key.gif" alt="RTL Support Demo" style="width: 100%; display: block;" />
-  <img src="https://docs.bln-studio.com/bln_notify/template.gif" alt="Tips Demo" style="width: 100%; display: block;" />
-  <img src="https://docs.bln-studio.com/bln_notify/rtl.gif" alt="RTL Support Demo" style="width: 100%; display: block;" />
+  <img src="./.github/assets/announce.gif" alt="Tips Demo" style="width: 100%; display: block;" />
+  <img src="./.github/assets/key.gif" alt="RTL Support Demo" style="width: 100%; display: block;" />
+  <img src="./.github/assets/template.gif" alt="Tips Demo" style="width: 100%; display: block;" />
+  <img src="./.github/assets/rtl.gif" alt="RTL Support Demo" style="width: 100%; display: block;" />
 </div>
 
 A standalone, flexible, and customizable notification system for RedM servers. BLN Notify provides a complete notification solution with support for animations, interactive key bindings, progress indicators, RTL languages, and extensive customization options.

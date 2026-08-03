@@ -208,7 +208,7 @@ RegisterCommand("bln_notify", function(source, args, rawCommand)
         description = args[3] or desc,
         icon = args[4] or defaultIcon,
         placement = (args[5] and validPlacements[args[5]] and args[5]) or defaultPlacement,
-        contentAlignment = "center"
+        contentAlignment = "right"
     }
 
     TriggerEvent("bln_notify:send", options)
@@ -227,7 +227,8 @@ TriggerEvent("chat:addSuggestion", "/bln_notify", "Show a custom notification", 
 -- --------------------------------
 RegisterCommand("bln_notify_template", function(source, args, rawCommand)
     local options = {
-        title = args[2],
+        title = args[2] or "This is a title example.",
+        placement = "middle-left",
     }
     options.description = args[3] or 'This is a description example.'
     TriggerEvent("bln_notify:send", options, args[1])
@@ -238,6 +239,17 @@ TriggerEvent("chat:addSuggestion", "/bln_notify_template", "Run notification fro
     { name = "title", help = "Title of notification." },
     { name = "description", help = "Description for notification (optional)." }
 })
+-- --------------------------------
+-- announcements example
+-- --------------------------------
+RegisterCommand("bln_notify_announce", function(source, args, rawCommand)
+    TriggerEvent("bln_notify:send", {
+        title = "~size:2rem~This is an announcement!",
+        description = "This is a description for the announcement.",
+        placement = "top-center",
+        contentAlignment = "center",
+    })
+end, false)
 
 -- --------------------------------
 -- progress notify example
