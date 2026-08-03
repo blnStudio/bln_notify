@@ -18,10 +18,10 @@
 </table>
 
 <p align="center">
-  <a href="https://youtu.be/kRLAsFJ-nSk"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=youtube&logoColor=white" alt="Youtube Demo" height="32" /></a>
-  <a href="https://discord.bln-studio.com/"><img src="https://img.shields.io/badge/Discord-1111?style=flat-square&logo=discord&logoColor=white&color=7289da" alt="Discord" height="32" /></a>
-  <img src="https://img.shields.io/github/v/release/blnStudio/bln_notify?style=flat-square" alt="GitHub release (latest by date)" height="32" />
-  <img src="https://img.shields.io/github/license/blnStudio/bln_notify?style=flat-square" alt="License" height="32" />
+  <a href="https://youtu.be/kRLAsFJ-nSk"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Demo" /></a>
+  <a href="https://discord.bln-studio.com/"><img src="https://img.shields.io/badge/Discord-1111?style=for-the-badge&logo=discord&logoColor=white&color=7289da" alt="Discord" /></a>
+  <img src="https://img.shields.io/github/v/release/blnStudio/bln_notify?style=for-the-badge" alt="GitHub release (latest by date)" />
+  <img src="https://img.shields.io/github/license/blnStudio/bln_notify?style=for-the-badge" alt="License" />
 </p>
 
 
